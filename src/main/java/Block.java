@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author vladi_geras on 07/11/2018
@@ -27,39 +28,30 @@ public class Block {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getPrevHash() {
 		return prevHash;
-	}
-
-	public void setPrevHash(String prevHash) {
-		this.prevHash = prevHash;
 	}
 
 	public String getHash() {
 		return hash;
 	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
-	}
-
 	public Object getPayload() {
 		return payload;
-	}
-
-	public void setPayload(Object payload) {
-		this.payload = payload;
 	}
 
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
-		this.dateTime = dateTime;
+	@Override
+	public String toString() {
+		return "{" +
+				"id: " + id + ", " +
+				"prevHash: " + prevHash + ", " +
+				"hash: " + hash + ", " +
+				"payload: " + payload + ", " +
+				"dateTime: " + dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.YYYY")) +
+				'}';
 	}
 }
