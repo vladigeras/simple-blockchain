@@ -10,6 +10,7 @@ public class Block {
 	private String prevHash;
 	private String hash;
 	private Object payload;
+	private Integer nonce;
 	private LocalDateTime dateTime;
 
 	public Block(Long id, String prevHash, Object payload) {
@@ -17,11 +18,22 @@ public class Block {
 		this.prevHash = prevHash;
 		this.payload = payload;
 		this.dateTime = LocalDateTime.now(ZoneOffset.UTC);
+		this.nonce = 0;
 		this.hash = calculateHash();
 	}
 
 	private String calculateHash() {
-		return StringUtil.applySha256(this.id + this.prevHash + this.dateTime.toString() + this.payload);
+		nonce++;
+		return StringUtil.applySha256(this.id + this.prevHash + this.dateTime.toString() + nonce + this.payload);
+	}
+
+	public void mineBlock(int difficulty) {
+		var target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
+		while (!hash.substring(0, difficulty).equals(target)) {
+			nonce++;
+			hash = calculateHash();
+		}
+		System.out.println("Block was mined : " + hash + " with nonce = " + nonce);
 	}
 
 	public Long getId() {
@@ -51,7 +63,8 @@ public class Block {
 				"prevHash: " + prevHash + ", " +
 				"hash: " + hash + ", " +
 				"payload: " + payload + ", " +
-				"dateTime: " + dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.YYYY")) +
+				"dateTime: " + dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.YYYY")) + ", " +
+				"nonce: " + nonce +
 				'}';
 	}
 }

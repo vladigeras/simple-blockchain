@@ -6,6 +6,7 @@ import java.util.List;
  */
 public class BlockChain {
 	private static List<Block> blocks;
+	private static Integer difficulty = 3;
 
 	public BlockChain() {
 		if (blocks == null) {
@@ -24,6 +25,7 @@ public class BlockChain {
 
 	public void addBlock(Block block) {
 		if (block == null) throw new IllegalArgumentException("Block must be non null");
+		block.mineBlock(difficulty);
 		blocks.add(block);
 
 		if (!isValidCurrentBlock()) {
