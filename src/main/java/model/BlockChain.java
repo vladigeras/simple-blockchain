@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class BlockChain {
 	}
 
 	public void addBlock(Block block) {
-		if (block == null) throw new IllegalArgumentException("Block must be non null");
+		if (block == null) throw new IllegalArgumentException("model.Block must be non null");
 		block.mineBlock(difficulty);
 		blocks.add(block);
 

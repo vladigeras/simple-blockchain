@@ -1,3 +1,7 @@
+package model;
+
+import util.StringUtil;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -33,7 +37,7 @@ public class Block {
 			nonce++;
 			hash = calculateHash();
 		}
-		System.out.println("Block was mined : " + hash + " with nonce = " + nonce);
+		System.out.println("model.Block was mined : " + hash + " with nonce = " + nonce);
 	}
 
 	public Long getId() {
