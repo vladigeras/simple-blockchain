@@ -5,6 +5,8 @@ import util.StringUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author vladi_geras on 07/11/2018
@@ -15,15 +17,14 @@ public class Block {
 	private String prevHash;
 	private String hash;
 	private Object payload;
-	private Integer nonce;
-	private LocalDateTime dateTime;
+	private Integer nonce = 0;
+	private LocalDateTime dateTime = LocalDateTime.now(ZoneOffset.UTC);
+	private List<Transaction> transactions = new ArrayList<>();
 
 	public Block(Long id, String prevHash, Object payload) {
 		this.id = id;
 		this.prevHash = prevHash;
 		this.payload = payload;
-		this.dateTime = LocalDateTime.now(ZoneOffset.UTC);
-		this.nonce = 0;
 		this.hash = calculateHash();
 	}
 

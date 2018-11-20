@@ -37,4 +37,20 @@ public class Transaction {
 		var data = StringUtil.getStringFromKey(sender) + StringUtil.getStringFromKey(reciepient) + amount;
 		return StringUtil.verifyECDSASig(sender, data, signature);
 	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public PublicKey getSender() {
+		return sender;
+	}
+
+	public PublicKey getReciepient() {
+		return reciepient;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
 }

@@ -1,8 +1,12 @@
 package util;
 
+import model.Transaction;
+
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.stream.Collectors;
 
 /**
  * @author vladi_geras on 07/11/2018
@@ -58,5 +62,23 @@ public class StringUtil {
 
 	public static String getStringFromKey(Key key) {
 		return Base64.getEncoder().encodeToString(key.getEncoded());
+	}
+
+	public static String getMerkleRoot(ArrayList<Transaction> transactions) {
+		var count = transactions.size();
+		var previousTreeLayer = transactions.stream().map(Transaction::getHash).collect(Collectors.toList());
+
+		var treeLayer = previousTreeLayer;
+
+		while (count > 1) {
+			treeLayer = new ArrayList<String>();
+
+			for (int i = 1; i < previousTreeLayer.size(); i++) {
+				treeLayer.add(applySha256(previousTreeLayer.get(i - 1) + previousTreeLayer.get(i)));
+			}
+			count = treeLayer.size();
+			previousTreeLayer = treeLayer;
+		}
+		return (treeLayer.size() == 1) ? treeLayer.get(0) : "";
 	}
 }
