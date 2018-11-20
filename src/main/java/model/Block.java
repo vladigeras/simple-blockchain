@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author vladi_geras on 07/11/2018
  */
 public class Block {
+
 	private Long id;
 	private String prevHash;
 	private String hash;
@@ -37,7 +38,7 @@ public class Block {
 			nonce++;
 			hash = calculateHash();
 		}
-		System.out.println("model.Block was mined : " + hash + " with nonce = " + nonce);
+		System.out.println("Block was mined : " + hash + " with nonce = " + nonce);
 	}
 
 	public Long getId() {

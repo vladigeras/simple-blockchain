@@ -7,6 +7,7 @@ import java.util.List;
  * @author vladi_geras on 07/11/2018
  */
 public class BlockChain {
+
 	private static List<Block> blocks;
 	private static Integer difficulty = 3;
 

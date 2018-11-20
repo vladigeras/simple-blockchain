@@ -18,7 +18,7 @@ public class Wallet {
 		generateKeys();
 	}
 
-	public void generateKeys() {
+	private void generateKeys() {
 		try {
 			var keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
 			var random = SecureRandom.getInstance("SHA1PRNG");
@@ -31,5 +31,13 @@ public class Wallet {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public PrivateKey getPrivateKey() {
+		return privateKey;
+	}
+
+	public PublicKey getPublicKey() {
+		return publicKey;
 	}
 }
